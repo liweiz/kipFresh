@@ -9,6 +9,7 @@
 #import "KFTableViewController.h"
 #import "KFItem.h"
 #import "KFTableViewCell.h"
+#import "UIViewController+KFExtra.h"
 
 @interface KFTableViewController ()
 
@@ -92,8 +93,8 @@
     
     if (self.isForCard) {
         cell.notes.text = [managedObject valueForKey:@"notes"];
-        cell.dateAdded.text = [managedObject valueForKey:@"dateAdded"];
-        cell.bestBefore.text = [managedObject valueForKey:@"bestBefore"];
+        cell.dateAdded.text = [self dateToString:(NSDate *)[managedObject valueForKey:@"timeAdded"]];
+        cell.bestBefore.text = [self dateToString:(NSDate *)[managedObject valueForKey:@"bestBefore"]];
     } else {
         cell.textLabel.text = [managedObject valueForKey:@"notes"];
     }

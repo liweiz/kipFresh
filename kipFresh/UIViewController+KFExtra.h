@@ -13,5 +13,6 @@
 - (NSDate *)stringToDate:(NSString *)string;
 - (NSArray *)getDateFromString:(NSString *)string;
 - (NSString *)combineToGetStringDate:(NSDateComponents *)c;
+- (NSString *)dateToString:(NSDate *)date;
 
 @end

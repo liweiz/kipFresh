@@ -9,6 +9,7 @@
 #import "KFTableViewCell.h"
 #import "KFRootViewCtl.h"
 
+
 @implementation KFTableViewCell
 
 @synthesize pic;
@@ -62,7 +63,7 @@
     } else {
         [self.pic removeFromSuperview];
     }
-    if (self.isForCardView) {
+    if (!self.isForCardView) {
         if (!self.darkBar) {
             self.darkBar = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.backgroundView.frame.size.width, self.backgroundView.frame.size.height)];
         }

@@ -16,12 +16,14 @@
 @synthesize fReq;
 @synthesize fResultsCtl;
 @synthesize sortSelection;
+@synthesize warningText;
 
 - (id)init
 {
     self = [super init];
     if (self) {
         self.sortSelection = [NSMutableArray arrayWithCapacity:0];
+        self.warningText = [[NSMutableString alloc] init];
     }
     return self;
 }
@@ -36,7 +38,11 @@
     self.fResultsCtl = [[NSFetchedResultsController alloc] initWithFetchRequest:self.fReq managedObjectContext:self.ctx sectionNameKeyPath:nil cacheName:nil];
     self.fResultsCtl.delegate = self;
     [self.fResultsCtl performFetch:nil];
-    NSLog(@"");
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
 }
 
 - (NSArray *)sortOption:(NSArray *)options

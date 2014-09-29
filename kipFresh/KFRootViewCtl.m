@@ -8,6 +8,7 @@
 
 #import "KFRootViewCtl.h"
 #import "KFItem.h"
+#import "UIViewController+KFExtra.h"
 
 @interface KFRootViewCtl ()
 
@@ -109,22 +110,43 @@
 //    self.cardViewCtl.tableView.hidden = YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showCard) name:@"rowSelected" object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadDataForTables) name:@"reloadData" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showWarning:) name:@"generalError" object:nil];
 }
 
 - (void)saveItem
 {
-    [self addItem];
-    [self.box saveToDb];
-    [self.listViewCtl.tableView reloadData];
+    BOOL errOccured = NO;
+    NSDate *d = [self stringToDate:self.bestBefore.text];
+    if ([self validateDateInput:self.bestBefore.text] && d) {
+        if ([self validateNotesInput:self.notes.text]) {
+            KFItem *i = [NSEntityDescription insertNewObjectForEntityForName:@"KFItem" inManagedObjectContext:self.box.ctx];
+            [i setValue:self.notes.text forKey:@"notes"];
+            [i setValue:d forKey:@"bestBefore"];
+            [i setValue:[NSDate date] forKey:@"timeAdded"];
+            if ([self.box saveToDb]) {
+                [self.interfaceBase setContentOffset:CGPointMake(self.interfaceBase.contentSize.width * 2 / 4, 0.0f) animated:YES];
+            } else {
+                errOccured = YES;
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"generalError" object:self];
+            }
+        } else {
+            errOccured = YES;
+            [self.box.warningText setString:@"Max: 144 characters"];
+        }
+    } else {
+        errOccured = YES;
+        [self.box.warningText setString:@"Please enter date info: YYYY-MM-DD."];
+    }
+    if (errOccured) {
+        [self showWarningWithName:self.box.warningText];
+    }
 }
 
-- (void)addItem
+- (void)reloadDataForTables
 {
-    KFItem *i = [NSEntityDescription insertNewObjectForEntityForName:@"KFItem" inManagedObjectContext:self.box.ctx];
-    [i setValue:self.notes.text forKey:@"notes"];
-    [i setValue:[self stringToDate:self.bestBefore.text] forKey:@"bestBefore"];
-    [i setValue:[NSDate date] forKey:@"timeAdded"];
+    [self.listViewCtl.tableView reloadData];
+    [self.cardViewCtl.tableView reloadData];
 }
 
 - (void)showCard
@@ -139,18 +161,8 @@
 
 - (void)refreshInputView
 {
-    [self prepareForInput];
+    self.bestBefore.text = [self dateToString:[NSDate date]];
 }
-
-- (void)prepareForInput
-{
-    NSDateComponents *c = [[NSCalendar currentCalendar]
-                                    components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay
-                                    fromDate:[NSDate date]];
-    self.bestBefore.text = [self combineToGetStringDate:c];
-}
-
-
 
 #pragma mark - validate input
 - (BOOL)validateDateInput:(NSString *)input
@@ -187,18 +199,24 @@
 
 #pragma mark - warning display
 
-- (void)showWarningWithText:(NSNotification *)note
+- (void)showWarning:(NSNotification *)note
+{
+    [self showWarningWithName:note.name];
+}
+
+- (void)showWarningWithName:(NSString *)notificationName
 {
     if (!self.warning) {
         self.warning = [[UILabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 220.0f) * 0.5f, (self.view.frame.size.height - 90.0f) * 0.5f, 220.0f, 90.0f)];
         [self.view addSubview:self.warning];
+        self.warning.font = [self.warning.font fontWithSize:16.0f];
         self.warning.textAlignment = NSTextAlignmentLeft;
     }
-//    if ([note.name isEqualToString:tvFetchOrSaveErr]) {
-//        self.warning.text = @"Something went wrong, please try later.";
-//    } else {
-//        self.warning.text = self.box.warning;
-//    }
+    if ([notificationName isEqualToString:@"generalError"]) {
+        self.warning.text = @"Something went wrong, please try later.";
+    } else {
+        self.warning.text = self.box.warningText;
+    }
     
     if (self.warning.alpha == 0.0f) {
         self.warning.alpha = 1.0f;

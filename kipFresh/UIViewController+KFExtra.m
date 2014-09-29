@@ -53,18 +53,23 @@
     NSString *day = [NSString stringWithFormat:@"%d", c.day];
     NSMutableString *s = [NSMutableString stringWithCapacity:0];
     [s appendString:year];
+    if (c.month < 10) {
+        [s appendString:@"0"];
+    }
     [s appendString:month];
+    if (c.day < 10) {
+        [s appendString:@"0"];
+    }
     [s appendString:day];
     return s;
 }
 
-//- (NSString *)dateToString:(NSDate *)date
-//{
-//
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-//    [dateFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
-//    return [dateFormatter dateFromString:string];
-//}
+- (NSString *)dateToString:(NSDate *)date
+{
+    NSDateComponents *c = [[NSCalendar currentCalendar]
+                           components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay
+                           fromDate:date];
+    return [self combineToGetStringDate:c];
+}
 
 @end

@@ -26,6 +26,7 @@ typedef NS_ENUM(NSInteger, KFSort) {
 @property (strong, nonatomic) NSFetchRequest *fReq;
 @property (strong, nonatomic) NSFetchedResultsController *fResultsCtl;
 @property (strong, nonatomic) NSMutableArray *sortSelection;
+@property (strong, nonatomic) NSMutableString *warningText;
 
 - (void)prepareDataSource;
 - (BOOL)saveToDb;
