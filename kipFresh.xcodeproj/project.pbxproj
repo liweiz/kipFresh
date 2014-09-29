@@ -1,0 +1,463 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EE03063419D3D14F00DC1244 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EE03063319D3D14F00DC1244 /* main.m */; };
+		EE03063719D3D14F00DC1244 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE03063619D3D14F00DC1244 /* AppDelegate.m */; };
+		EE03063A19D3D14F00DC1244 /* kipFresh.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EE03063819D3D14F00DC1244 /* kipFresh.xcdatamodeld */; };
+		EE03064219D3D14F00DC1244 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE03064119D3D14F00DC1244 /* Images.xcassets */; };
+		EE03065119D3D14F00DC1244 /* kipFreshTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EE03065019D3D14F00DC1244 /* kipFreshTests.m */; };
+		EE03065C19D3D34900DC1244 /* KFItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EE03065B19D3D34900DC1244 /* KFItem.m */; };
+		EE03065F19D3D4A100DC1244 /* KFRootViewCtl.m in Sources */ = {isa = PBXBuildFile; fileRef = EE03065E19D3D4A100DC1244 /* KFRootViewCtl.m */; };
+		EE03066219D3D4FE00DC1244 /* KFBox.m in Sources */ = {isa = PBXBuildFile; fileRef = EE03066119D3D4FE00DC1244 /* KFBox.m */; };
+		EEC7120119D8F03700D53796 /* UIViewController+KFExtra.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC7120019D8F03700D53796 /* UIViewController+KFExtra.m */; };
+		EECB711E19D46023000BC200 /* KFCam.m in Sources */ = {isa = PBXBuildFile; fileRef = EECB711C19D46023000BC200 /* KFCam.m */; };
+		EED135C319D4A407002604CC /* KFTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EED135C219D4A407002604CC /* KFTableViewCell.m */; };
+		EED37BBB19D5136F00544BBF /* KFTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EED37BBA19D5136F00544BBF /* KFTableViewController.m */; };
+		EED47D7119D7C0800061B1B9 /* KFView.m in Sources */ = {isa = PBXBuildFile; fileRef = EED47D7019D7C0800061B1B9 /* KFView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EE03064B19D3D14F00DC1244 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EE03062619D3D14F00DC1244 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EE03062D19D3D14F00DC1244;
+			remoteInfo = kipFresh;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EE03062E19D3D14F00DC1244 /* kipFresh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kipFresh.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE03063219D3D14F00DC1244 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EE03063319D3D14F00DC1244 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EE03063519D3D14F00DC1244 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EE03063619D3D14F00DC1244 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EE03063919D3D14F00DC1244 /* kipFresh.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = kipFresh.xcdatamodel; sourceTree = "<group>"; };
+		EE03064119D3D14F00DC1244 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EE03064A19D3D14F00DC1244 /* kipFreshTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = kipFreshTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE03064F19D3D14F00DC1244 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EE03065019D3D14F00DC1244 /* kipFreshTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = kipFreshTests.m; sourceTree = "<group>"; };
+		EE03065A19D3D34900DC1244 /* KFItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFItem.h; sourceTree = "<group>"; };
+		EE03065B19D3D34900DC1244 /* KFItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFItem.m; sourceTree = "<group>"; };
+		EE03065D19D3D4A100DC1244 /* KFRootViewCtl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFRootViewCtl.h; sourceTree = "<group>"; };
+		EE03065E19D3D4A100DC1244 /* KFRootViewCtl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFRootViewCtl.m; sourceTree = "<group>"; };
+		EE03066019D3D4FE00DC1244 /* KFBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFBox.h; sourceTree = "<group>"; };
+		EE03066119D3D4FE00DC1244 /* KFBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFBox.m; sourceTree = "<group>"; };
+		EEC711FF19D8F03700D53796 /* UIViewController+KFExtra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KFExtra.h"; sourceTree = "<group>"; };
+		EEC7120019D8F03700D53796 /* UIViewController+KFExtra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KFExtra.m"; sourceTree = "<group>"; };
+		EECB711919D46000000BC200 /* KFCam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFCam.h; sourceTree = "<group>"; };
+		EECB711C19D46023000BC200 /* KFCam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFCam.m; sourceTree = "<group>"; };
+		EECF3F1D19D5CF2E00312FF5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		EED135C119D4A407002604CC /* KFTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFTableViewCell.h; sourceTree = "<group>"; };
+		EED135C219D4A407002604CC /* KFTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFTableViewCell.m; sourceTree = "<group>"; };
+		EED37BB919D5136F00544BBF /* KFTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFTableViewController.h; sourceTree = "<group>"; };
+		EED37BBA19D5136F00544BBF /* KFTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFTableViewController.m; sourceTree = "<group>"; };
+		EED47D6F19D7C0800061B1B9 /* KFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFView.h; sourceTree = "<group>"; };
+		EED47D7019D7C0800061B1B9 /* KFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EE03062B19D3D14F00DC1244 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE03064719D3D14F00DC1244 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EE03062519D3D14F00DC1244 = {
+			isa = PBXGroup;
+			children = (
+				EECF3F1D19D5CF2E00312FF5 /* UIKit.framework */,
+				EE03063019D3D14F00DC1244 /* kipFresh */,
+				EE03064D19D3D14F00DC1244 /* kipFreshTests */,
+				EE03062F19D3D14F00DC1244 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EE03062F19D3D14F00DC1244 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EE03062E19D3D14F00DC1244 /* kipFresh.app */,
+				EE03064A19D3D14F00DC1244 /* kipFreshTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EE03063019D3D14F00DC1244 /* kipFresh */ = {
+			isa = PBXGroup;
+			children = (
+				EED47D6F19D7C0800061B1B9 /* KFView.h */,
+				EED47D7019D7C0800061B1B9 /* KFView.m */,
+				EE03063519D3D14F00DC1244 /* AppDelegate.h */,
+				EE03063619D3D14F00DC1244 /* AppDelegate.m */,
+				EE03065D19D3D4A100DC1244 /* KFRootViewCtl.h */,
+				EE03065E19D3D4A100DC1244 /* KFRootViewCtl.m */,
+				EED37BB919D5136F00544BBF /* KFTableViewController.h */,
+				EED37BBA19D5136F00544BBF /* KFTableViewController.m */,
+				EED135C119D4A407002604CC /* KFTableViewCell.h */,
+				EED135C219D4A407002604CC /* KFTableViewCell.m */,
+				EEC711FF19D8F03700D53796 /* UIViewController+KFExtra.h */,
+				EEC7120019D8F03700D53796 /* UIViewController+KFExtra.m */,
+				EECB711919D46000000BC200 /* KFCam.h */,
+				EECB711C19D46023000BC200 /* KFCam.m */,
+				EE03066019D3D4FE00DC1244 /* KFBox.h */,
+				EE03066119D3D4FE00DC1244 /* KFBox.m */,
+				EE03065A19D3D34900DC1244 /* KFItem.h */,
+				EE03065B19D3D34900DC1244 /* KFItem.m */,
+				EE03064119D3D14F00DC1244 /* Images.xcassets */,
+				EE03063819D3D14F00DC1244 /* kipFresh.xcdatamodeld */,
+				EE03063119D3D14F00DC1244 /* Supporting Files */,
+			);
+			path = kipFresh;
+			sourceTree = "<group>";
+		};
+		EE03063119D3D14F00DC1244 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EE03063219D3D14F00DC1244 /* Info.plist */,
+				EE03063319D3D14F00DC1244 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EE03064D19D3D14F00DC1244 /* kipFreshTests */ = {
+			isa = PBXGroup;
+			children = (
+				EE03065019D3D14F00DC1244 /* kipFreshTests.m */,
+				EE03064E19D3D14F00DC1244 /* Supporting Files */,
+			);
+			path = kipFreshTests;
+			sourceTree = "<group>";
+		};
+		EE03064E19D3D14F00DC1244 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EE03064F19D3D14F00DC1244 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EE03062D19D3D14F00DC1244 /* kipFresh */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EE03065419D3D14F00DC1244 /* Build configuration list for PBXNativeTarget "kipFresh" */;
+			buildPhases = (
+				EE03062A19D3D14F00DC1244 /* Sources */,
+				EE03062B19D3D14F00DC1244 /* Frameworks */,
+				EE03062C19D3D14F00DC1244 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = kipFresh;
+			productName = kipFresh;
+			productReference = EE03062E19D3D14F00DC1244 /* kipFresh.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EE03064919D3D14F00DC1244 /* kipFreshTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EE03065719D3D14F00DC1244 /* Build configuration list for PBXNativeTarget "kipFreshTests" */;
+			buildPhases = (
+				EE03064619D3D14F00DC1244 /* Sources */,
+				EE03064719D3D14F00DC1244 /* Frameworks */,
+				EE03064819D3D14F00DC1244 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EE03064C19D3D14F00DC1244 /* PBXTargetDependency */,
+			);
+			name = kipFreshTests;
+			productName = kipFreshTests;
+			productReference = EE03064A19D3D14F00DC1244 /* kipFreshTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EE03062619D3D14F00DC1244 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Liwei Zhang";
+				TargetAttributes = {
+					EE03062D19D3D14F00DC1244 = {
+						CreatedOnToolsVersion = 6.0.1;
+					};
+					EE03064919D3D14F00DC1244 = {
+						CreatedOnToolsVersion = 6.0.1;
+						TestTargetID = EE03062D19D3D14F00DC1244;
+					};
+				};
+			};
+			buildConfigurationList = EE03062919D3D14F00DC1244 /* Build configuration list for PBXProject "kipFresh" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EE03062519D3D14F00DC1244;
+			productRefGroup = EE03062F19D3D14F00DC1244 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EE03062D19D3D14F00DC1244 /* kipFresh */,
+				EE03064919D3D14F00DC1244 /* kipFreshTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EE03062C19D3D14F00DC1244 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE03064219D3D14F00DC1244 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE03064819D3D14F00DC1244 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EE03062A19D3D14F00DC1244 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EED135C319D4A407002604CC /* KFTableViewCell.m in Sources */,
+				EECB711E19D46023000BC200 /* KFCam.m in Sources */,
+				EE03066219D3D4FE00DC1244 /* KFBox.m in Sources */,
+				EE03063719D3D14F00DC1244 /* AppDelegate.m in Sources */,
+				EED47D7119D7C0800061B1B9 /* KFView.m in Sources */,
+				EED37BBB19D5136F00544BBF /* KFTableViewController.m in Sources */,
+				EE03063419D3D14F00DC1244 /* main.m in Sources */,
+				EE03065F19D3D4A100DC1244 /* KFRootViewCtl.m in Sources */,
+				EE03063A19D3D14F00DC1244 /* kipFresh.xcdatamodeld in Sources */,
+				EEC7120119D8F03700D53796 /* UIViewController+KFExtra.m in Sources */,
+				EE03065C19D3D34900DC1244 /* KFItem.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE03064619D3D14F00DC1244 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE03065119D3D14F00DC1244 /* kipFreshTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EE03064C19D3D14F00DC1244 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EE03062D19D3D14F00DC1244 /* kipFresh */;
+			targetProxy = EE03064B19D3D14F00DC1244 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		EE03065219D3D14F00DC1244 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		EE03065319D3D14F00DC1244 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EE03065519D3D14F00DC1244 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = kipFresh/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		EE03065619D3D14F00DC1244 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = kipFresh/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		EE03065819D3D14F00DC1244 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = kipFreshTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/kipFresh.app/kipFresh";
+			};
+			name = Debug;
+		};
+		EE03065919D3D14F00DC1244 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = kipFreshTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/kipFresh.app/kipFresh";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EE03062919D3D14F00DC1244 /* Build configuration list for PBXProject "kipFresh" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE03065219D3D14F00DC1244 /* Debug */,
+				EE03065319D3D14F00DC1244 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EE03065419D3D14F00DC1244 /* Build configuration list for PBXNativeTarget "kipFresh" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE03065519D3D14F00DC1244 /* Debug */,
+				EE03065619D3D14F00DC1244 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EE03065719D3D14F00DC1244 /* Build configuration list for PBXNativeTarget "kipFreshTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE03065819D3D14F00DC1244 /* Debug */,
+				EE03065919D3D14F00DC1244 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		EE03063819D3D14F00DC1244 /* kipFresh.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EE03063919D3D14F00DC1244 /* kipFresh.xcdatamodel */,
+			);
+			currentVersion = EE03063919D3D14F00DC1244 /* kipFresh.xcdatamodel */;
+			path = kipFresh.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = EE03062619D3D14F00DC1244 /* Project object */;
+}
