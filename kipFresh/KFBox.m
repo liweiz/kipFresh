@@ -23,6 +23,7 @@
     self = [super init];
     if (self) {
         self.sortSelection = [NSMutableArray arrayWithCapacity:0];
+        [self.sortSelection addObject:[NSNumber numberWithInteger:KFSortTimeCreatedD]];
         self.warningText = [[NSMutableString alloc] init];
     }
     return self;
@@ -40,10 +41,28 @@
     [self.fResultsCtl performFetch:nil];
 }
 
+#pragma mark - fetchedResultsController delegate callbacks
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"startTableChange" object:self];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath {
+    NSMutableDictionary *d = [NSMutableDictionary dictionaryWithCapacity:0];
+    [d setValue:indexPath forKey:@"indexPath"];
+    [d setValue:newIndexPath forKey:@"newIndexPath"];
+    [d setValue:[NSNumber numberWithUnsignedInteger:type] forKey:@"type"];
+    NSNotification *n = [NSNotification notificationWithName:@"runTableChange" object:self userInfo:d];
+    [[NSNotificationCenter defaultCenter] postNotification:n];
+}
+
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"endTableChange" object:self];
 }
+
 
 - (NSArray *)sortOption:(NSArray *)options
 {

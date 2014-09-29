@@ -11,7 +11,7 @@
 #import "KFTableViewController.h"
 #import "KFView.h"
 
-@interface KFRootViewCtl : UIViewController
+@interface KFRootViewCtl : UIViewController <NSFetchedResultsControllerDelegate>
 
 @property (assign, nonatomic) CGRect appRect;
 @property (strong, nonatomic) KFBox *box;

@@ -112,6 +112,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showCard) name:@"rowSelected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadDataForTables) name:@"reloadData" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showWarning:) name:@"generalError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTableChange) name:@"startTableChange" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(runTableChange:) name:@"runTableChange" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTableChange) name:@"endTableChange" object:nil];
 }
 
 - (void)saveItem
@@ -237,6 +240,61 @@
     }
 }
 
+#pragma mark - change tables
+
+- (void)startTableChange
+{
+    [self.listViewCtl.tableView beginUpdates];
+    [self.cardViewCtl.tableView beginUpdates];
+}
+
+- (void)runTableChange:(NSNotification *)n
+{
+    NSFetchedResultsChangeType type = [(NSNumber *)[n.userInfo valueForKey:@"type"] unsignedIntegerValue];
+    NSIndexPath *indexPath = [n.userInfo valueForKey:@"indexPath"];
+    NSIndexPath *newIndexPath = [n.userInfo valueForKey:@"newIndexPath"];
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            // Insertion needs to find the indexPath in the new dataSource
+            [self.listViewCtl.tableView insertRowsAtIndexPaths:@[newIndexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            [self.cardViewCtl.tableView insertRowsAtIndexPaths:@[newIndexPath]
+                                              withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            // Removing and updating use the indexPath for existing dataSource
+            // Updating and insertion do not happen at the same loop in this app. So no need to update the dataSource here.
+            [self.listViewCtl.tableView deleteRowsAtIndexPaths:@[indexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            [self.cardViewCtl.tableView deleteRowsAtIndexPaths:@[indexPath]
+                                              withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            // this is from http://oleb.net/blog/2013/02/nsfetchedresultscontroller-documentation-bug/
+            [self.listViewCtl.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.cardViewCtl.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            //[self configureCell:[tableView cellForRowAtIndexPath:indexPath]
+            //atIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            //                [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+            //                                 withRowAnimation:UITableViewRowAnimationFade];
+            //                [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+            //                                 withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+
+}
+
+- (void)endTableChange
+{
+    [self.listViewCtl.tableView endUpdates];
+    [self.cardViewCtl.tableView endUpdates];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
