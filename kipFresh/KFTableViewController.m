@@ -88,17 +88,19 @@
     }
     [self.tableView registerClass:[KFTableViewCell class] forCellReuseIdentifier:cellIdentifier];
     KFTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    
+    // Make sure the layout is done before assigning any value from NSManagedObj.
+    [cell layoutIfNeeded];
     NSManagedObject *managedObject = [self.box.fResultsCtl.fetchedObjects objectAtIndex:indexPath.row];
-    
     if (self.isForCard) {
+        NSLog(@"obj: %@", managedObject);
         cell.notes.text = [managedObject valueForKey:@"notes"];
         cell.dateAdded.text = [self dateToString:(NSDate *)[managedObject valueForKey:@"timeAdded"]];
         cell.bestBefore.text = [self dateToString:(NSDate *)[managedObject valueForKey:@"bestBefore"]];
+        cell.daysLeft.text = [NSString stringWithFormat:@"%d", [self getDaysLeftFrom:(NSDate *)[managedObject valueForKey:@"timeAdded"] to:(NSDate *)[managedObject valueForKey:@"bestBefore"]]];
     } else {
         cell.textLabel.text = [managedObject valueForKey:@"notes"];
     }
-    
+
     return cell;
 }
 

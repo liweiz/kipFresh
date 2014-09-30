@@ -72,4 +72,12 @@
     return [self combineToGetStringDate:c];
 }
 
+- (NSInteger)getDaysLeftFrom:(NSDate *)start to:(NSDate *)end
+{
+    NSDateComponents *c = [[NSCalendar currentCalendar]
+                           components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay
+                           fromDate:start toDate:end options:NSCalendarWrapComponents];
+    return c.day;
+}
+
 @end

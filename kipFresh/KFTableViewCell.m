@@ -68,30 +68,37 @@
             self.darkBar = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.backgroundView.frame.size.width, self.backgroundView.frame.size.height)];
         }
     } else {
-        self.notes = [[UITextView alloc] initWithFrame:CGRectMake(10.0f, 10.0f, self.appRect.size.width - 20.0f, 80.0f)];
-        self.notes.backgroundColor = self.textBackGroundColor;
-        self.notes.alpha = self.textBackGroundAlpha;
-        [self.contentView addSubview:self.notes];
+        if (!self.notes) {
+            self.notes = [[UITextView alloc] initWithFrame:CGRectMake(10.0f, 10.0f, self.appRect.size.width - 20.0f, 80.0f)];
+            self.notes.backgroundColor = self.textBackGroundColor;
+            self.notes.alpha = self.textBackGroundAlpha;
+            [self.contentView addSubview:self.notes];
+        }
+        if (!self.dateAdded) {
+            self.dateAdded = [[UITextField alloc] initWithFrame:CGRectMake(10.0f, 100.0f, self.appRect.size.width - 20.0f, 44.0f)];
+            self.dateAdded.backgroundColor = self.textBackGroundColor;
+            self.dateAdded.alpha = self.textBackGroundAlpha;
+            [self.contentView addSubview:self.dateAdded];
+        }
+        if (!self.bestBefore) {
+            self.bestBefore = [[UITextField alloc] initWithFrame:CGRectMake(10.0f, self.dateAdded.frame.origin.y + self.dateAdded.frame.size.height + 10.0f, self.appRect.size.width - 20.0f, 44.0f)];
+            self.bestBefore.backgroundColor = self.textBackGroundColor;
+            self.bestBefore.alpha = self.textBackGroundAlpha;
+            [self.contentView addSubview:self.bestBefore];
+        }
         
-        self.dateAdded = [[UITextField alloc] initWithFrame:CGRectMake(10.0f, 100.0f, self.appRect.size.width - 20.0f, 44.0f)];
-        self.dateAdded.backgroundColor = self.textBackGroundColor;
-        self.dateAdded.alpha = self.textBackGroundAlpha;
-        [self.contentView addSubview:self.dateAdded];
-        
-        self.bestBefore = [[UITextField alloc] initWithFrame:CGRectMake(10.0f, self.dateAdded.frame.origin.y + self.dateAdded.frame.size.height + 10.0f, self.appRect.size.width - 20.0f, 44.0f)];
-        self.bestBefore.backgroundColor = self.textBackGroundColor;
-        self.bestBefore.alpha = self.textBackGroundAlpha;
-        [self.contentView addSubview:self.bestBefore];
-        
-        self.daysLeft = [[UITextField alloc] initWithFrame:CGRectMake(10.0f, 300.0f, self.appRect.size.width - 20.0f, 100.0f)];
-        self.daysLeft.backgroundColor = self.textBackGroundColor;
-        self.daysLeft.alpha = self.textBackGroundAlpha;
-        [self.contentView addSubview:self.daysLeft];
-        
-        self.deleteBtn = [[UIView alloc] initWithFrame:CGRectMake(5.0f, self.daysLeft.frame.origin.y + self.daysLeft.frame.size.height + 10.0f, 44.0f, 44.0f)];
-        self.deleteBtn.backgroundColor = self.textBackGroundColor;
-        self.deleteBtn.alpha = self.textBackGroundAlpha;
-        [self.contentView addSubview:self.deleteBtn];
+        if (!self.deleteBtn) {
+            self.deleteBtn = [[UIView alloc] initWithFrame:CGRectMake((self.frame.size.width - 44.0f) / 2, self.frame.size.height - 20.0f - 44.0f, 44.0f, 44.0f)];
+            self.deleteBtn.backgroundColor = self.textBackGroundColor;
+            self.deleteBtn.alpha = self.textBackGroundAlpha;
+            [self.contentView addSubview:self.deleteBtn];
+        }
+        if (!self.daysLeft) {
+            self.daysLeft = [[UITextField alloc] initWithFrame:CGRectMake((self.frame.size.width - 70.0f) / 2, self.frame.size.height / 2, 70.0f, self.frame.size.height / 2 - self.deleteBtn.frame.size.height - 20.0f * 2)];
+            self.daysLeft.backgroundColor = self.textBackGroundColor;
+            self.daysLeft.alpha = self.textBackGroundAlpha;
+            [self.contentView addSubview:self.daysLeft];
+        }
     }
     
     if (self.pic.image) {

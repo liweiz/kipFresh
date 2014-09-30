@@ -14,5 +14,6 @@
 - (NSArray *)getDateFromString:(NSString *)string;
 - (NSString *)combineToGetStringDate:(NSDateComponents *)c;
 - (NSString *)dateToString:(NSDate *)date;
+- (NSInteger)getDaysLeftFrom:(NSDate *)start to:(NSDate *)end;
 
 @end

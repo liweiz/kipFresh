@@ -80,7 +80,7 @@
     [self.inputView addSubview:self.bestBefore];
     self.notes = [[UITextView alloc] initWithFrame:CGRectMake(self.bestBefore.frame.origin.x, self.bestBefore.frame.origin.y * 2 + self.bestBefore.frame.size.height, self.box.appRect.size.width - 10.0f, 120.0f)];
     self.notes.backgroundColor = [UIColor whiteColor];
-    self.addBtn = [[UIView alloc] initWithFrame:CGRectMake(self.bestBefore.frame.origin.x, 470.0f, self.bestBefore.frame.size.width, 44.0f)];
+    self.addBtn = [[UIView alloc] initWithFrame:CGRectMake(self.bestBefore.frame.origin.x, self.view.frame.size.height - 10.0f - 44.0f, self.bestBefore.frame.size.width, 44.0f)];
     self.addBtn.backgroundColor = [UIColor greenColor];
     self.addTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(saveItem)];
     [self.addBtn addGestureRecognizer:self.addTap];
@@ -97,7 +97,6 @@
     [self addChildViewController:self.listViewCtl];
     [self.interfaceBase addSubview:self.listViewCtl.tableView];
     [self.listViewCtl didMoveToParentViewController:self];
-    [self.listViewCtl.tableView reloadData];
     
     // CardViewCtl
     self.cardViewCtl = [[KFTableViewController alloc] init];
@@ -106,15 +105,17 @@
     [self addChildViewController:self.cardViewCtl];
     [self.interfaceBase addSubview:self.cardViewCtl.tableView];
     [self.cardViewCtl didMoveToParentViewController:self];
-    [self.cardViewCtl.tableView reloadData];
 //    self.cardViewCtl.tableView.hidden = YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showCard) name:@"rowSelected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadDataForTables) name:@"reloadData" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showWarning:) name:@"generalError" object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTableChange) name:@"startTableChange" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(runTableChange:) name:@"runTableChange" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTableChange) name:@"endTableChange" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteItem:) name:@"deleteItem" object:nil];
 }
 
 - (void)saveItem
@@ -146,6 +147,21 @@
     }
 }
 
+- (void)deleteItem:(NSNotification *)n
+{
+    BOOL errOccured = YES;
+    NSManagedObject *x = [self.box.ctx objectWithID:[n.userInfo valueForKey:@"objId"]];
+    if (x) {
+        [self.box.ctx deleteObject:x];
+        if ([self.box saveToDb]) {
+            errOccured = NO;
+        }
+    }
+    if (errOccured) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"generalError" object:self];
+    }
+}
+
 - (void)reloadDataForTables
 {
     [self.listViewCtl.tableView reloadData];
@@ -154,8 +170,6 @@
 
 - (void)showCard
 {
-    [self.box prepareDataSource];
-    [self.cardViewCtl.tableView reloadData];
     [self.cardViewCtl.tableView scrollToRowAtIndexPath:self.listViewCtl.tableView.indexPathForSelectedRow atScrollPosition:UITableViewScrollPositionTop animated:NO];
     self.cardViewCtl.tableView.hidden = NO;
     [self.cardViewCtl.tableView.superview bringSubviewToFront:self.cardViewCtl.tableView];
