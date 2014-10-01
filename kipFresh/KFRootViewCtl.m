@@ -24,12 +24,17 @@
 @synthesize addBtn;
 @synthesize addTap;
 @synthesize notes;
+@synthesize notesPlaceHolder;
+@synthesize purchasedOn;
 @synthesize camView;
 @synthesize listViewCtl;
 @synthesize cardViewCtl;
 @synthesize menuView;
 @synthesize itemViewCtl;
 @synthesize warning;
+@synthesize dayAddedLabel;
+@synthesize dayAddedSwitch;
+@synthesize dayAdded;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,8 +49,9 @@
 - (void)loadView
 {
     self.view = [[UIView alloc] initWithFrame:self.appRect];
-    self.view.backgroundColor = [UIColor lightGrayColor];
+    self.view.backgroundColor = [UIColor clearColor];
     self.box.appRect = self.appRect;
+    self.box.width = self.appRect.size.width - self.box.originX * 2;
 }
 
 - (void)viewDidLoad {
@@ -71,22 +77,60 @@
     // InputView
     self.inputView = [[KFView alloc] initWithFrame:CGRectMake(self.appRect.size.width, 0.0f, self.appRect.size.width, self.appRect.size.height)];
     self.inputView.touchToDismissKeyboardIsOn = YES;
-    self.inputView.backgroundColor = [UIColor blueColor];
+    self.inputView.backgroundColor = [UIColor clearColor];
     [self.interfaceBase addSubview:self.inputView];
-    self.bestBefore = [[UITextField alloc] initWithFrame:CGRectMake(5.0f, 5.0f, self.box.appRect.size.width - 10.0f, 44.0f)];
-    self.bestBefore.backgroundColor = [UIColor whiteColor];
-    self.bestBefore.placeholder = @"Best before: YYYY/MM/DD";
-    [self refreshInputView];
+    // BestBefore
+    self.bestBefore = [[UITextField alloc] initWithFrame:CGRectMake(self.box.originX, self.box.originY, self.box.width - self.box.gap - 54.0f, 44.0f)];
+    
+    self.bestBefore.backgroundColor = [UIColor clearColor];
+    self.bestBefore.placeholder = @"Best before: YYYYMMDD";
+    self.bestBefore.delegate = self;
+    self.bestBefore.keyboardType = UIKeyboardTypeNumberPad;
+    self.bestBefore.font = [UIFont systemFontOfSize:self.box.fontSizeL];
+    [self configLayer:self.bestBefore.layer box:self.box isClear:YES];
     [self.inputView addSubview:self.bestBefore];
-    self.notes = [[UITextView alloc] initWithFrame:CGRectMake(self.bestBefore.frame.origin.x, self.bestBefore.frame.origin.y * 2 + self.bestBefore.frame.size.height, self.box.appRect.size.width - 10.0f, 120.0f)];
-    self.notes.backgroundColor = [UIColor whiteColor];
-    self.addBtn = [[UIView alloc] initWithFrame:CGRectMake(self.bestBefore.frame.origin.x, self.view.frame.size.height - 10.0f - 44.0f, self.bestBefore.frame.size.width, 44.0f)];
+    // AddBtn
+    self.addBtn = [[UIView alloc] initWithFrame:CGRectMake(self.bestBefore.frame.origin.x + self.bestBefore.frame.size.width + self.box.gap, self.box.originY, 54.0f, self.bestBefore.frame.size.height)];
+    [self configLayer:self.addBtn.layer box:self.box isClear:NO];
     self.addBtn.backgroundColor = [UIColor greenColor];
     self.addTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(saveItem)];
     [self.addBtn addGestureRecognizer:self.addTap];
     [self.inputView addSubview:self.addBtn];
+    // Notes
+    self.notes = [[UITextView alloc] initWithFrame:CGRectMake(self.bestBefore.frame.origin.x, self.bestBefore.frame.origin.y + self.bestBefore.frame.size.height + self.box.gap, self.box.width, self.box.oneLineHeight * 2)];
+    [self configLayer:self.notes.layer box:self.box isClear:YES];
+    self.notes.backgroundColor = [UIColor clearColor];
+    self.notes.delegate = self;
+    self.notes.font = [UIFont systemFontOfSize:self.box.fontSizeL];
+    self.notes.text = @"";
     [self.inputView addSubview:self.notes];
-    self.notes.text = @"Take some notes here.";
+    self.notesPlaceHolder = [[UITextField alloc] initWithFrame:CGRectMake(0.0f, -4.0f, self.box.width - self.box.gap - 54.0f, 44.0f)];
+    self.notesPlaceHolder.backgroundColor = [UIColor clearColor];
+    self.notesPlaceHolder.placeholder = @"Info for this item";
+    self.notesPlaceHolder.userInteractionEnabled = NO;
+    self.notesPlaceHolder.font = [UIFont systemFontOfSize:self.box.fontSizeL];
+    [self.notes addSubview:self.notesPlaceHolder];
+    // DayAdded
+    self.dayAddedLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.box.originX, self.notes.frame.origin.y + self.notes.frame.size.height + self.box.gap, self.bestBefore.frame.size.width, self.bestBefore.frame.size.height)];
+    [self configLayer:self.dayAddedLabel.layer box:self.box isClear:NO];
+    self.dayAddedLabel.text = @"Purchased today";
+    self.dayAddedLabel.font = [UIFont systemFontOfSize:self.box.fontSizeL];
+    [self.inputView addSubview:self.dayAddedLabel];
+    self.dayAddedSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(self.addBtn.frame.origin.x, self.dayAddedLabel.frame.origin.y + 7.0f, self.addBtn.frame.size.width, self.addBtn.frame.size.height)];
+    self.dayAddedSwitch.on = YES;
+    
+    [self.dayAddedSwitch addTarget:self action:@selector(changeSwitch:) forControlEvents:UIControlEventValueChanged];
+    [self.inputView addSubview:self.dayAddedSwitch];
+    self.dayAddedSwitch.onTintColor = [UIColor greenColor];
+    self.dayAdded = [[UITextField alloc] initWithFrame:CGRectMake(self.box.originX, self.box.gap + self.notes.frame.origin.y + self.notes.frame.size.height, self.box.width - self.box.gap - 54.0f, 44.0f)];
+    [self configLayer:self.dayAdded.layer box:self.box isClear:YES];
+    self.dayAdded.backgroundColor = [UIColor clearColor];
+    self.dayAdded.placeholder = @"Date purchased: YYYYMMDD";
+    self.dayAdded.delegate = self;
+    self.dayAdded.keyboardType = UIKeyboardTypeNumberPad;
+    self.dayAdded.font = [UIFont systemFontOfSize:self.box.fontSizeL];
+    [self.inputView addSubview:self.dayAdded];
+    self.dayAdded.hidden = YES;
     
     [self.box prepareDataSource];
     
@@ -121,26 +165,35 @@
 - (void)saveItem
 {
     BOOL errOccured = NO;
-    NSDate *d = [self stringToDate:self.bestBefore.text];
-    if ([self validateDateInput:self.bestBefore.text] && d) {
-        if ([self validateNotesInput:self.notes.text]) {
-            KFItem *i = [NSEntityDescription insertNewObjectForEntityForName:@"KFItem" inManagedObjectContext:self.box.ctx];
-            [i setValue:self.notes.text forKey:@"notes"];
-            [i setValue:d forKey:@"bestBefore"];
-            [i setValue:[NSDate date] forKey:@"timeAdded"];
-            if ([self.box saveToDb]) {
-                [self.interfaceBase setContentOffset:CGPointMake(self.interfaceBase.contentSize.width * 2 / 4, 0.0f) animated:YES];
+    if (!self.dayAddedSwitch.isOn) {
+        NSDate *p = [self stringToDate:self.dayAdded.text];
+        if (!p) {
+            errOccured = YES;
+            [self.box.warningText setString:@"Please enter date info: YYYY-MM-DD."];
+        }
+    }
+    if (!errOccured) {
+        NSDate *d = [self stringToDate:self.bestBefore.text];
+        if (d) {
+            if ([self validateNotesInput:self.notes.text]) {
+                KFItem *i = [NSEntityDescription insertNewObjectForEntityForName:@"KFItem" inManagedObjectContext:self.box.ctx];
+                [i setValue:self.notes.text forKey:@"notes"];
+                [i setValue:d forKey:@"bestBefore"];
+                [i setValue:[NSDate date] forKey:@"timeAdded"];
+                if ([self.box saveToDb]) {
+                    [self.interfaceBase setContentOffset:CGPointMake(self.interfaceBase.contentSize.width * 2 / 4, 0.0f) animated:YES];
+                } else {
+                    errOccured = YES;
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"generalError" object:self];
+                }
             } else {
                 errOccured = YES;
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"generalError" object:self];
+                [self.box.warningText setString:@"Max: 144 characters"];
             }
         } else {
             errOccured = YES;
-            [self.box.warningText setString:@"Max: 144 characters"];
+            [self.box.warningText setString:@"Please enter date info: YYYY-MM-DD."];
         }
-    } else {
-        errOccured = YES;
-        [self.box.warningText setString:@"Please enter date info: YYYY-MM-DD."];
     }
     if (errOccured) {
         [self showWarningWithName:self.box.warningText];
@@ -176,42 +229,56 @@
     [self.interfaceBase setContentOffset:CGPointMake(self.interfaceBase.contentSize.width * 3 / 4, 0.0f) animated:YES];
 }
 
-- (void)refreshInputView
+
+- (void)changeSwitch:(UISwitch *)sender
 {
-    self.bestBefore.text = [self dateToString:[NSDate date]];
+    if(sender.on){
+        NSLog(@"Switch is ON");
+        self.dayAdded.hidden = YES;
+        self.dayAddedLabel.hidden = NO;
+    } else{
+        NSLog(@"Switch is OFF");
+        self.dayAdded.hidden = NO;
+        self.dayAddedLabel.hidden = YES;
+    }
 }
 
-#pragma mark - validate input
-- (BOOL)validateDateInput:(NSString *)input
+- (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    NSSet *n = [NSSet setWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"0", nil];
-    if (input.length == 8) {
-        for (NSUInteger i = 0; i < 8; i++) {
-            NSString *x = [input substringWithRange:NSMakeRange(i, 1)];
-            BOOL isNumber = NO;
-            for (NSString *s in n) {
-                if ([x isEqualToString:s]) {
-                    isNumber = YES;
-                    break;
-                }
-            }
-            if (!isNumber) {
-                break;
-            }
-            if (isNumber && i == 7) {
-                return YES;
-            }
+    if ([textField isEqual:self.bestBefore]) {
+        if (textField.text.length == 0) {
+            NSDateComponents *c = [[NSDateComponents alloc] init];
+            c.day = 5;
+            NSDate *dayAfter5 = [[NSCalendar currentCalendar] dateByAddingComponents:c toDate:[NSDate date] options:0];
+            self.bestBefore.text = [self dateToString:dayAfter5];
         }
     }
-    return NO;
+    if ([textField isEqual:self.dayAdded]) {
+        if (textField.text.length == 0) {
+            NSDateComponents *c = [[NSDateComponents alloc] init];
+            c.day = -5;
+            NSDate *dayAfter5 = [[NSCalendar currentCalendar] dateByAddingComponents:c toDate:[NSDate date] options:0];
+            self.dayAdded.text = [self dateToString:dayAfter5];
+        }
+    }
 }
 
-- (BOOL)validateNotesInput:(NSString *)input
+- (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    if (input.length > 0 && input.length <= 144) {
-        return YES;
+    if ([textView isEqual:self.notes]) {
+        if (!self.notesPlaceHolder.hidden) {
+            self.notesPlaceHolder.hidden = YES;
+        }
     }
-    return NO;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    if ([textView isEqual:self.notes]) {
+        if (self.notes.text.length == 0) {
+            self.notesPlaceHolder.hidden = NO;
+        }
+    }
 }
 
 #pragma mark - warning display
@@ -224,31 +291,34 @@
 - (void)showWarningWithName:(NSString *)notificationName
 {
     if (!self.warning) {
-        self.warning = [[UILabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 220.0f) * 0.5f, (self.view.frame.size.height - 90.0f) * 0.5f, 220.0f, 90.0f)];
+        CGFloat w = 220.0f;
+        CGFloat h = 75.0f;
+        self.warning = [[UILabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - w) * 0.5f, (self.view.frame.size.height - h) * 0.5f - 30.0f, w, h)];
         [self.view addSubview:self.warning];
-        self.warning.font = [self.warning.font fontWithSize:16.0f];
-        self.warning.textAlignment = NSTextAlignmentLeft;
+        self.warning.font = [self.warning.font fontWithSize:self.box.fontSizeM];
+        self.warning.textColor = [UIColor whiteColor];
+        self.warning.textAlignment = NSTextAlignmentCenter;
+        self.warning.lineBreakMode = NSLineBreakByWordWrapping;
+        self.warning.numberOfLines = 0;
+        self.warning.backgroundColor = self.box.kfGrey;
     }
     if ([notificationName isEqualToString:@"generalError"]) {
         self.warning.text = @"Something went wrong, please try later.";
     } else {
         self.warning.text = self.box.warningText;
     }
-    
-    if (self.warning.alpha == 0.0f) {
-        self.warning.alpha = 1.0f;
-        [self.view bringSubviewToFront:self.warning];
-    }
+    self.warning.alpha = 1.0f;
+    [self.view bringSubviewToFront:self.warning];
     [UIView animateWithDuration:4 animations:^{
         self.warning.alpha = 0.0f;
     } completion:^(BOOL finished){
-        self.warning.text = nil;
+//        self.warning.text = nil;
     }];
 }
 
 - (void)hideWarning
 {
-    self.warning.text = nil;
+//    self.warning.text = nil;
     if (self.warning.alpha == 1.0f) {
         self.warning.alpha = 0.0f;
     }

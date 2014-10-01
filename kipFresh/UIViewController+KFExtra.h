@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KFBox.h"
 
 @interface UIViewController (KFExtra)
 
@@ -15,5 +16,8 @@
 - (NSString *)combineToGetStringDate:(NSDateComponents *)c;
 - (NSString *)dateToString:(NSDate *)date;
 - (NSInteger)getDaysLeftFrom:(NSDate *)start to:(NSDate *)end;
+- (BOOL)validateDateInput:(NSString *)input;
+- (BOOL)validateNotesInput:(NSString *)input;
+- (void)configLayer:(CALayer *)layer box:(KFBox *)b isClear:(BOOL)isClear;
 
 @end

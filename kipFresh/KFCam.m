@@ -105,7 +105,7 @@ static CGFloat optionAvailableAlpha = 0.6;
     [super viewDidLoad];
     
     self.view.clipsToBounds = NO;
-    self.view.backgroundColor = [UIColor blackColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     screenWidth = self.view.bounds.size.width;
     screenHeight = self.view.bounds.size.height;

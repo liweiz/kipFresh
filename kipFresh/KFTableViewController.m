@@ -30,7 +30,7 @@
         x = self.box.appRect.size.width * 2;
     }
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(x, 0.0f, self.box.appRect.size.width, self.box.appRect.size.height) style:UITableViewStylePlain];
-    self.tableView.backgroundColor = [UIColor redColor];
+    self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     self.tableView.allowsMultipleSelection = NO;
     self.tableView.dataSource = self;
@@ -88,15 +88,20 @@
     }
     [self.tableView registerClass:[KFTableViewCell class] forCellReuseIdentifier:cellIdentifier];
     KFTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    cell.box = self.box;
+    NSManagedObject *managedObject = [self.box.fResultsCtl.fetchedObjects objectAtIndex:indexPath.row];
+    if (!self.isForCard) {
+        cell.darkBarRatio =
+    }
     // Make sure the layout is done before assigning any value from NSManagedObj.
     [cell layoutIfNeeded];
-    NSManagedObject *managedObject = [self.box.fResultsCtl.fetchedObjects objectAtIndex:indexPath.row];
     if (self.isForCard) {
         NSLog(@"obj: %@", managedObject);
         cell.notes.text = [managedObject valueForKey:@"notes"];
         cell.dateAdded.text = [self dateToString:(NSDate *)[managedObject valueForKey:@"timeAdded"]];
         cell.bestBefore.text = [self dateToString:(NSDate *)[managedObject valueForKey:@"bestBefore"]];
         cell.daysLeft.text = [NSString stringWithFormat:@"%d", [self getDaysLeftFrom:(NSDate *)[managedObject valueForKey:@"timeAdded"] to:(NSDate *)[managedObject valueForKey:@"bestBefore"]]];
+        cell.objId = managedObject.objectID;
     } else {
         cell.textLabel.text = [managedObject valueForKey:@"notes"];
     }

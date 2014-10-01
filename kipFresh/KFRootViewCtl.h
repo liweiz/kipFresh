@@ -11,7 +11,7 @@
 #import "KFTableViewController.h"
 #import "KFView.h"
 
-@interface KFRootViewCtl : UIViewController <NSFetchedResultsControllerDelegate>
+@interface KFRootViewCtl : UIViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, UITextViewDelegate>
 
 @property (assign, nonatomic) CGRect appRect;
 @property (strong, nonatomic) KFBox *box;
@@ -22,8 +22,13 @@
 @property (strong, nonatomic) KFView *inputView;
 @property (strong, nonatomic) UITextField *bestBefore;
 @property (strong, nonatomic) UITextView *notes;
+@property (strong, nonatomic) UITextField *notesPlaceHolder;
+@property (strong, nonatomic) UITextField *purchasedOn;
 @property (strong, nonatomic) UIView *addBtn;
 @property (strong, nonatomic) UITapGestureRecognizer *addTap;
+@property (strong, nonatomic) UILabel *dayAddedLabel;
+@property (strong, nonatomic) UISwitch *dayAddedSwitch;
+@property (strong, nonatomic) UITextField *dayAdded;
 
 @property (strong, nonatomic) KFTableViewController *listViewCtl;
 @property (strong, nonatomic) KFTableViewController *cardViewCtl;

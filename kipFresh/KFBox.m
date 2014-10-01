@@ -17,6 +17,13 @@
 @synthesize fResultsCtl;
 @synthesize sortSelection;
 @synthesize warningText;
+@synthesize originX;
+@synthesize originY;
+@synthesize oneLineHeight;
+@synthesize width;
+@synthesize gap;
+@synthesize kfGreen;
+@synthesize kfGrey;
 
 - (id)init
 {
@@ -25,6 +32,14 @@
         self.sortSelection = [NSMutableArray arrayWithCapacity:0];
         [self.sortSelection addObject:[NSNumber numberWithInteger:KFSortTimeCreatedD]];
         self.warningText = [[NSMutableString alloc] init];
+        self.originX = 15.0f;
+        self.originY = 15.0f;
+        self.gap = 10.0f;
+        self.oneLineHeight = 40.0f;
+        self.fontSizeL = 16.0f;
+        self.fontSizeM = 14.0f;
+        self.kfGreen = [UIColor colorWithRed:157.0f/255.0f green:225.0f/255.0f blue:63.0f/255.0f alpha:0.5f];
+        self.kfGrey = [UIColor colorWithRed:130.0f/255.0f green:131.0f/255.0f blue:126.0f/255.0f alpha:0.5f];
     }
     return self;
 }

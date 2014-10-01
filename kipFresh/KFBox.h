@@ -22,6 +22,15 @@ typedef NS_ENUM(NSInteger, KFSort) {
 @interface KFBox : NSObject <NSFetchedResultsControllerDelegate>
 
 @property (assign, nonatomic) CGRect appRect;
+@property (assign, nonatomic) CGFloat originX;
+@property (assign, nonatomic) CGFloat originY;
+@property (assign, nonatomic) CGFloat width;
+@property (assign, nonatomic) CGFloat oneLineHeight;
+@property (assign, nonatomic) CGFloat gap;
+@property (assign, nonatomic) CGFloat fontSizeL;
+@property (assign, nonatomic) CGFloat fontSizeM;
+@property (strong, nonatomic) UIColor *kfGreen;
+@property (strong, nonatomic) UIColor *kfGrey;
 @property (strong, nonatomic) NSManagedObjectContext *ctx;
 @property (strong, nonatomic) NSFetchRequest *fReq;
 @property (strong, nonatomic) NSFetchedResultsController *fResultsCtl;
