@@ -12,15 +12,14 @@
 		EE03063A19D3D14F00DC1244 /* kipFresh.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EE03063819D3D14F00DC1244 /* kipFresh.xcdatamodeld */; };
 		EE03064219D3D14F00DC1244 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE03064119D3D14F00DC1244 /* Images.xcassets */; };
 		EE03065119D3D14F00DC1244 /* kipFreshTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EE03065019D3D14F00DC1244 /* kipFreshTests.m */; };
-		EE03065C19D3D34900DC1244 /* KFItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EE03065B19D3D34900DC1244 /* KFItem.m */; };
 		EE03065F19D3D4A100DC1244 /* KFRootViewCtl.m in Sources */ = {isa = PBXBuildFile; fileRef = EE03065E19D3D4A100DC1244 /* KFRootViewCtl.m */; };
 		EE03066219D3D4FE00DC1244 /* KFBox.m in Sources */ = {isa = PBXBuildFile; fileRef = EE03066119D3D4FE00DC1244 /* KFBox.m */; };
-		EEC7120119D8F03700D53796 /* UIViewController+KFExtra.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC7120019D8F03700D53796 /* UIViewController+KFExtra.m */; };
+		EEC7120119D8F03700D53796 /* NSObject+KFExtra.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC7120019D8F03700D53796 /* NSObject+KFExtra.m */; };
 		EECB711E19D46023000BC200 /* KFCam.m in Sources */ = {isa = PBXBuildFile; fileRef = EECB711C19D46023000BC200 /* KFCam.m */; };
 		EED135C319D4A407002604CC /* KFTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EED135C219D4A407002604CC /* KFTableViewCell.m */; };
-		EED15E7B19DB3931001A79E0 /* KFLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EED15E7A19DB3931001A79E0 /* KFLayer.m */; };
 		EED37BBB19D5136F00544BBF /* KFTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EED37BBA19D5136F00544BBF /* KFTableViewController.m */; };
 		EED47D7119D7C0800061B1B9 /* KFView.m in Sources */ = {isa = PBXBuildFile; fileRef = EED47D7019D7C0800061B1B9 /* KFView.m */; };
+		EED662A519DD07AA004DAA5F /* KFItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EED662A419DD07AA004DAA5F /* KFItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,25 +43,23 @@
 		EE03064A19D3D14F00DC1244 /* kipFreshTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = kipFreshTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE03064F19D3D14F00DC1244 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE03065019D3D14F00DC1244 /* kipFreshTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = kipFreshTests.m; sourceTree = "<group>"; };
-		EE03065A19D3D34900DC1244 /* KFItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFItem.h; sourceTree = "<group>"; };
-		EE03065B19D3D34900DC1244 /* KFItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFItem.m; sourceTree = "<group>"; };
 		EE03065D19D3D4A100DC1244 /* KFRootViewCtl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFRootViewCtl.h; sourceTree = "<group>"; };
 		EE03065E19D3D4A100DC1244 /* KFRootViewCtl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFRootViewCtl.m; sourceTree = "<group>"; };
 		EE03066019D3D4FE00DC1244 /* KFBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFBox.h; sourceTree = "<group>"; };
 		EE03066119D3D4FE00DC1244 /* KFBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFBox.m; sourceTree = "<group>"; };
-		EEC711FF19D8F03700D53796 /* UIViewController+KFExtra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KFExtra.h"; sourceTree = "<group>"; };
-		EEC7120019D8F03700D53796 /* UIViewController+KFExtra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KFExtra.m"; sourceTree = "<group>"; };
+		EEC711FF19D8F03700D53796 /* NSObject+KFExtra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+KFExtra.h"; sourceTree = "<group>"; };
+		EEC7120019D8F03700D53796 /* NSObject+KFExtra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+KFExtra.m"; sourceTree = "<group>"; };
 		EECB711919D46000000BC200 /* KFCam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFCam.h; sourceTree = "<group>"; };
 		EECB711C19D46023000BC200 /* KFCam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFCam.m; sourceTree = "<group>"; };
 		EECF3F1D19D5CF2E00312FF5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		EED135C119D4A407002604CC /* KFTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFTableViewCell.h; sourceTree = "<group>"; };
 		EED135C219D4A407002604CC /* KFTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFTableViewCell.m; sourceTree = "<group>"; };
-		EED15E7919DB3931001A79E0 /* KFLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFLayer.h; sourceTree = "<group>"; };
-		EED15E7A19DB3931001A79E0 /* KFLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFLayer.m; sourceTree = "<group>"; };
 		EED37BB919D5136F00544BBF /* KFTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFTableViewController.h; sourceTree = "<group>"; };
 		EED37BBA19D5136F00544BBF /* KFTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFTableViewController.m; sourceTree = "<group>"; };
 		EED47D6F19D7C0800061B1B9 /* KFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFView.h; sourceTree = "<group>"; };
 		EED47D7019D7C0800061B1B9 /* KFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFView.m; sourceTree = "<group>"; };
+		EED662A319DD07AA004DAA5F /* KFItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFItem.h; sourceTree = "<group>"; };
+		EED662A419DD07AA004DAA5F /* KFItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,16 +112,14 @@
 				EED37BBA19D5136F00544BBF /* KFTableViewController.m */,
 				EED135C119D4A407002604CC /* KFTableViewCell.h */,
 				EED135C219D4A407002604CC /* KFTableViewCell.m */,
-				EEC711FF19D8F03700D53796 /* UIViewController+KFExtra.h */,
-				EEC7120019D8F03700D53796 /* UIViewController+KFExtra.m */,
+				EEC711FF19D8F03700D53796 /* NSObject+KFExtra.h */,
+				EEC7120019D8F03700D53796 /* NSObject+KFExtra.m */,
 				EECB711919D46000000BC200 /* KFCam.h */,
 				EECB711C19D46023000BC200 /* KFCam.m */,
-				EED15E7919DB3931001A79E0 /* KFLayer.h */,
-				EED15E7A19DB3931001A79E0 /* KFLayer.m */,
 				EE03066019D3D4FE00DC1244 /* KFBox.h */,
 				EE03066119D3D4FE00DC1244 /* KFBox.m */,
-				EE03065A19D3D34900DC1244 /* KFItem.h */,
-				EE03065B19D3D34900DC1244 /* KFItem.m */,
+				EED662A319DD07AA004DAA5F /* KFItem.h */,
+				EED662A419DD07AA004DAA5F /* KFItem.m */,
 				EE03064119D3D14F00DC1244 /* Images.xcassets */,
 				EE03063819D3D14F00DC1244 /* kipFresh.xcdatamodeld */,
 				EE03063119D3D14F00DC1244 /* Supporting Files */,
@@ -259,15 +254,14 @@
 				EED135C319D4A407002604CC /* KFTableViewCell.m in Sources */,
 				EECB711E19D46023000BC200 /* KFCam.m in Sources */,
 				EE03066219D3D4FE00DC1244 /* KFBox.m in Sources */,
+				EED662A519DD07AA004DAA5F /* KFItem.m in Sources */,
 				EE03063719D3D14F00DC1244 /* AppDelegate.m in Sources */,
 				EED47D7119D7C0800061B1B9 /* KFView.m in Sources */,
 				EED37BBB19D5136F00544BBF /* KFTableViewController.m in Sources */,
-				EED15E7B19DB3931001A79E0 /* KFLayer.m in Sources */,
 				EE03063419D3D14F00DC1244 /* main.m in Sources */,
 				EE03065F19D3D4A100DC1244 /* KFRootViewCtl.m in Sources */,
 				EE03063A19D3D14F00DC1244 /* kipFresh.xcdatamodeld in Sources */,
-				EEC7120119D8F03700D53796 /* UIViewController+KFExtra.m in Sources */,
-				EE03065C19D3D34900DC1244 /* KFItem.m in Sources */,
+				EEC7120119D8F03700D53796 /* NSObject+KFExtra.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

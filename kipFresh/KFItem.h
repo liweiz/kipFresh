@@ -2,7 +2,7 @@
 //  KFItem.h
 //  kipFresh
 //
-//  Created by Liwei Zhang on 2014-09-25.
+//  Created by Liwei Zhang on 2014-10-02.
 //  Copyright (c) 2014 Liwei Zhang. All rights reserved.
 //
 
@@ -12,9 +12,12 @@
 
 @interface KFItem : NSManagedObject
 
+@property (nonatomic, retain) NSDate * bestBefore;
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSData * pic;
 @property (nonatomic, retain) NSDate * timeAdded;
-@property (nonatomic, retain) NSDate * bestBefore;
+@property (nonatomic, retain) NSNumber * daysLeft;
+@property (nonatomic, retain) NSNumber * freshness;
+
 
 @end

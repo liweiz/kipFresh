@@ -37,6 +37,7 @@
     }
     tempViewController.box.ctx = self.ctx;
     self.window.rootViewController = tempViewController;
+    self.window.tintColor = [UIColor clearColor];
     //    [Crashlytics startWithAPIKey:@"d30dc014389e0e949766f2cd80d7559c4af53569"];
     return YES;
 }

@@ -9,7 +9,7 @@
 #import "KFTableViewController.h"
 #import "KFItem.h"
 #import "KFTableViewCell.h"
-#import "UIViewController+KFExtra.h"
+#import "NSObject+KFExtra.h"
 
 @interface KFTableViewController ()
 
@@ -31,7 +31,7 @@
     }
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(x, 0.0f, self.box.appRect.size.width, self.box.appRect.size.height) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.allowsMultipleSelection = NO;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -58,6 +58,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     [self.tableView reloadData];
+    
 }
 
 
@@ -90,17 +91,15 @@
     KFTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.box = self.box;
     NSManagedObject *managedObject = [self.box.fResultsCtl.fetchedObjects objectAtIndex:indexPath.row];
-    if (!self.isForCard) {
-        cell.darkBarRatio =
-    }
     // Make sure the layout is done before assigning any value from NSManagedObj.
+    cell.statusCode = [[managedObject valueForKey:@"freshness"] integerValue];
     [cell layoutIfNeeded];
     if (self.isForCard) {
         NSLog(@"obj: %@", managedObject);
         cell.notes.text = [managedObject valueForKey:@"notes"];
-        cell.dateAdded.text = [self dateToString:(NSDate *)[managedObject valueForKey:@"timeAdded"]];
-        cell.bestBefore.text = [self dateToString:(NSDate *)[managedObject valueForKey:@"bestBefore"]];
-        cell.daysLeft.text = [NSString stringWithFormat:@"%d", [self getDaysLeftFrom:(NSDate *)[managedObject valueForKey:@"timeAdded"] to:(NSDate *)[managedObject valueForKey:@"bestBefore"]]];
+        cell.dateAdded.text = [self dateToString:[managedObject valueForKey:@"timeAdded"]];
+        cell.bestBefore.text = [self dateToString:[managedObject valueForKey:@"bestBefore"]];
+        cell.daysLeft.text = [NSString stringWithFormat:@"%d", [[managedObject valueForKey:@"daysLeft"] integerValue]];
         cell.objId = managedObject.objectID;
     } else {
         cell.textLabel.text = [managedObject valueForKey:@"notes"];

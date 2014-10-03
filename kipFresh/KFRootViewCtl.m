@@ -8,7 +8,7 @@
 
 #import "KFRootViewCtl.h"
 #import "KFItem.h"
-#import "UIViewController+KFExtra.h"
+#import "NSObject+KFExtra.h"
 
 @interface KFRootViewCtl ()
 
@@ -66,7 +66,7 @@
     self.interfaceBase.showsVerticalScrollIndicator = NO;
     self.interfaceBase.showsHorizontalScrollIndicator = NO;
     self.interfaceBase.pagingEnabled = YES;
-    self.interfaceBase.backgroundColor = [UIColor whiteColor];
+    self.interfaceBase.backgroundColor = [UIColor clearColor];
     
     [self.view addSubview:self.interfaceBase];
     
@@ -92,7 +92,7 @@
     // AddBtn
     self.addBtn = [[UIView alloc] initWithFrame:CGRectMake(self.bestBefore.frame.origin.x + self.bestBefore.frame.size.width + self.box.gap, self.box.originY, 54.0f, self.bestBefore.frame.size.height)];
     [self configLayer:self.addBtn.layer box:self.box isClear:NO];
-    self.addBtn.backgroundColor = [UIColor greenColor];
+    self.addBtn.backgroundColor = self.box.kfGreen0;
     self.addTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(saveItem)];
     [self.addBtn addGestureRecognizer:self.addTap];
     [self.inputView addSubview:self.addBtn];
@@ -121,7 +121,7 @@
     
     [self.dayAddedSwitch addTarget:self action:@selector(changeSwitch:) forControlEvents:UIControlEventValueChanged];
     [self.inputView addSubview:self.dayAddedSwitch];
-    self.dayAddedSwitch.onTintColor = [UIColor greenColor];
+    self.dayAddedSwitch.onTintColor = self.box.kfGreen0;
     self.dayAdded = [[UITextField alloc] initWithFrame:CGRectMake(self.box.originX, self.box.gap + self.notes.frame.origin.y + self.notes.frame.size.height, self.box.width - self.box.gap - 54.0f, 44.0f)];
     [self configLayer:self.dayAdded.layer box:self.box isClear:YES];
     self.dayAdded.backgroundColor = [UIColor clearColor];
@@ -179,12 +179,26 @@
                 KFItem *i = [NSEntityDescription insertNewObjectForEntityForName:@"KFItem" inManagedObjectContext:self.box.ctx];
                 [i setValue:self.notes.text forKey:@"notes"];
                 [i setValue:d forKey:@"bestBefore"];
-                [i setValue:[NSDate date] forKey:@"timeAdded"];
-                if ([self.box saveToDb]) {
-                    [self.interfaceBase setContentOffset:CGPointMake(self.interfaceBase.contentSize.width * 2 / 4, 0.0f) animated:YES];
+                if (self.dayAddedSwitch.on) {
+                    [i setValue:[NSDate date] forKey:@"timeAdded"];
                 } else {
-                    errOccured = YES;
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"generalError" object:self];
+                    NSDate *d1 = [self stringToDate:self.dayAdded.text];
+                    if (d1) {
+                        [i setValue:d1 forKey:@"timeAdded"];
+                        [self resetDaysLeft:i];
+                        [self resetFreshness:i];
+                    } else {
+                        errOccured = YES;
+                        [self.box.warningText setString:@"Please enter date info: YYYY-MM-DD."];
+                    }
+                }
+                if (!errOccured) {
+                    if ([self.box saveToDb]) {
+                        [self.interfaceBase setContentOffset:CGPointMake(self.interfaceBase.contentSize.width * 2 / 4, 0.0f) animated:YES];
+                    } else {
+                        errOccured = YES;
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"generalError" object:self];
+                    }
                 }
             } else {
                 errOccured = YES;
@@ -300,7 +314,7 @@
         self.warning.textAlignment = NSTextAlignmentCenter;
         self.warning.lineBreakMode = NSLineBreakByWordWrapping;
         self.warning.numberOfLines = 0;
-        self.warning.backgroundColor = self.box.kfGrey;
+        self.warning.backgroundColor = self.box.kfGray;
     }
     if ([notificationName isEqualToString:@"generalError"]) {
         self.warning.text = @"Something went wrong, please try later.";
@@ -323,6 +337,7 @@
         self.warning.alpha = 0.0f;
     }
 }
+
 
 #pragma mark - change tables
 

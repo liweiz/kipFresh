@@ -13,10 +13,12 @@
 typedef NS_ENUM(NSInteger, KFSort) {
     KFSortCellTextAlphabetA,
     KFSortCellTextAlphabetD,
-    KFSortTimeLeftA,
-    KFSortTimeLeftD,
+    KFSortDaysLeftA,
+    KFSortDaysLeftD,
     KFSortTimeCreatedA,
-    KFSortTimeCreatedD
+    KFSortTimeCreatedD,
+    KFSortFreshnessA,
+    KFSortFreshnessD
 };
 
 @interface KFBox : NSObject <NSFetchedResultsControllerDelegate>
@@ -29,8 +31,11 @@ typedef NS_ENUM(NSInteger, KFSort) {
 @property (assign, nonatomic) CGFloat gap;
 @property (assign, nonatomic) CGFloat fontSizeL;
 @property (assign, nonatomic) CGFloat fontSizeM;
-@property (strong, nonatomic) UIColor *kfGreen;
-@property (strong, nonatomic) UIColor *kfGrey;
+// There are two dimensions of infomation to indicate an item's freshness. 1. number of days left 2. percentage since the day it is purchased. 2 may be more make sense to indicate the freshness, however, days left is a clearer indicator to let us know the specific data to take action on. So we'd better let users have both info to know not only the freshness but also the actual data to act on. My solution is provide 3 scales of green to indicate the freshness and gray for those no longer within bestbefore.
+@property (strong, nonatomic) UIColor *kfGreen0;
+@property (strong, nonatomic) UIColor *kfGreen1;
+@property (strong, nonatomic) UIColor *kfGreen2;
+@property (strong, nonatomic) UIColor *kfGray;
 @property (strong, nonatomic) NSManagedObjectContext *ctx;
 @property (strong, nonatomic) NSFetchRequest *fReq;
 @property (strong, nonatomic) NSFetchedResultsController *fResultsCtl;

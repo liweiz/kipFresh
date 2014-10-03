@@ -8,6 +8,7 @@
 
 #import "KFBox.h"
 #import "KFItem.h"
+#import "NSObject+KFExtra.h"
 
 @implementation KFBox
 
@@ -22,15 +23,19 @@
 @synthesize oneLineHeight;
 @synthesize width;
 @synthesize gap;
-@synthesize kfGreen;
-@synthesize kfGrey;
+@synthesize kfGreen0;
+@synthesize kfGreen1;
+@synthesize kfGreen2;
+@synthesize kfGray;
 
 - (id)init
 {
     self = [super init];
     if (self) {
         self.sortSelection = [NSMutableArray arrayWithCapacity:0];
-        [self.sortSelection addObject:[NSNumber numberWithInteger:KFSortTimeCreatedD]];
+        [self.sortSelection addObject:[NSNumber numberWithInteger:KFSortFreshnessD]];
+        [self.sortSelection addObject:[NSNumber numberWithInteger:KFSortDaysLeftA]];
+//        [self.sortSelection addObject:[NSNumber numberWithInteger:KFSortCellTextAlphabetA]];
         self.warningText = [[NSMutableString alloc] init];
         self.originX = 15.0f;
         self.originY = 15.0f;
@@ -38,8 +43,10 @@
         self.oneLineHeight = 40.0f;
         self.fontSizeL = 16.0f;
         self.fontSizeM = 14.0f;
-        self.kfGreen = [UIColor colorWithRed:157.0f/255.0f green:225.0f/255.0f blue:63.0f/255.0f alpha:0.5f];
-        self.kfGrey = [UIColor colorWithRed:130.0f/255.0f green:131.0f/255.0f blue:126.0f/255.0f alpha:0.5f];
+        self.kfGreen0 = [UIColor colorWithRed:157.0f/255.0f green:225.0f/255.0f blue:63.0f/255.0f alpha:1.0f];
+        self.kfGreen1 = [UIColor colorWithRed:150.0f/255.0f green:206.0f/255.0f blue:107.0f/255.0f alpha:1.0f];
+        self.kfGreen2 = [UIColor colorWithRed:152.0f/255.0f green:189.0f/255.0f blue:93.0f/255.0f alpha:1.0f];
+        self.kfGray = [UIColor colorWithRed:130.0f/255.0f green:131.0f/255.0f blue:126.0f/255.0f alpha:1.0f];
     }
     return self;
 }
@@ -54,6 +61,18 @@
     self.fResultsCtl = [[NSFetchedResultsController alloc] initWithFetchRequest:self.fReq managedObjectContext:self.ctx sectionNameKeyPath:nil cacheName:nil];
     self.fResultsCtl.delegate = self;
     [self.fResultsCtl performFetch:nil];
+    [self refreshDb];
+}
+
+- (void)refreshDb
+{
+    for (KFItem *i in self.fResultsCtl.fetchedObjects) {
+        [self resetDaysLeft:i];
+        [self resetFreshness:i];
+    }
+    if (![self saveToDb]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"generalError" object:self];
+    }
 }
 
 #pragma mark - fetchedResultsController delegate callbacks
@@ -100,20 +119,22 @@
             return [NSSortDescriptor sortDescriptorWithKey:@"notes" ascending:NO comparator:^(NSString *obj1, NSString *obj2) {
                 return [obj1 localizedCompare:obj2];
             }];
-        case KFSortTimeLeftA:
-            return [[NSSortDescriptor alloc] initWithKey:@"bestBefore" ascending:YES];
-        case KFSortTimeLeftD:
-            return [[NSSortDescriptor alloc] initWithKey:@"bestBefore" ascending:NO];
+        case KFSortDaysLeftA:
+            return [[NSSortDescriptor alloc] initWithKey:@"daysLeft" ascending:YES];
+        case KFSortDaysLeftD:
+            return [[NSSortDescriptor alloc] initWithKey:@"daysLeft" ascending:NO];
         case KFSortTimeCreatedA:
             return [[NSSortDescriptor alloc] initWithKey:@"timeAdded" ascending:YES];
         case KFSortTimeCreatedD:
             return [[NSSortDescriptor alloc] initWithKey:@"timeAdded" ascending:NO];
+        case KFSortFreshnessA:
+            return [[NSSortDescriptor alloc] initWithKey:@"freshness" ascending:YES];
+        case KFSortFreshnessD:
+            return [[NSSortDescriptor alloc] initWithKey:@"freshness" ascending:NO];
         default:
             return nil;
     }
 }
-
-
 
 - (BOOL)saveToDb
 {

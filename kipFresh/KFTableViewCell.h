@@ -22,9 +22,9 @@
 @property (strong, nonatomic) UIImageView *pic;
 
 // For list
-@property (strong, nonatomic) UIView *darkBar;
-@property (assign, nonatomic) CGFloat *darkBarRatio;
-
+@property (assign, nonatomic) NSInteger statusCode;
+@property (strong, nonatomic) UIView *status;
+@property (strong, nonatomic) UIView *bottomLine;
 // For item detail
 @property (strong, nonatomic) UITextView *notes;
 @property (strong, nonatomic) UITextField *bestBefore;

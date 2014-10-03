@@ -1,5 +1,5 @@
 //
-//  UIViewController+KFExtra.h
+//  NSObject+KFExtra.h
 //  kipFresh
 //
 //  Created by Liwei Zhang on 2014-09-28.
@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "KFBox.h"
+#import "KFItem.h"
 
-@interface UIViewController (KFExtra)
+@interface NSObject (KFExtra)
 
 - (NSDate *)stringToDate:(NSString *)string;
 - (NSArray *)getDateFromString:(NSString *)string;
@@ -19,5 +20,10 @@
 - (BOOL)validateDateInput:(NSString *)input;
 - (BOOL)validateNotesInput:(NSString *)input;
 - (void)configLayer:(CALayer *)layer box:(KFBox *)b isClear:(BOOL)isClear;
+
+- (void)resetDaysLeft:(KFItem *)obj;
+
+// Four scales correspond to four colors: 0: green0, 1: green1, 2: green2, 3: gray.
+- (void)resetFreshness:(KFItem *)obj;
 
 @end

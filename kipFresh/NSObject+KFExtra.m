@@ -1,15 +1,18 @@
 //
-//  UIViewController+KFExtra.m
+//  NSObject+KFExtra.m
 //  kipFresh
 //
 //  Created by Liwei Zhang on 2014-09-28.
 //  Copyright (c) 2014 Liwei Zhang. All rights reserved.
 //
 
-#import "UIViewController+KFExtra.h"
+#import "NSObject+KFExtra.h"
 #import <QuartzCore/QuartzCore.h>
 
-@implementation UIViewController (KFExtra)
+
+@implementation NSObject (KFExtra)
+
+#pragma mark - config layer
 
 - (void)configLayer:(CALayer *)layer box:(KFBox *)b isClear:(BOOL)isClear
 {
@@ -17,11 +20,40 @@
         CALayer *bottomLine = [CALayer layer];
         CGFloat lineHeight = 1.0f;
         bottomLine.frame = CGRectMake(0.0f, layer.bounds.size.height - lineHeight, layer.bounds.size.width, lineHeight);
-        bottomLine.backgroundColor = [UIColor greenColor].CGColor;
+        bottomLine.backgroundColor = b.kfGreen0.CGColor;
         [layer addSublayer:bottomLine];
     } else {
         layer.cornerRadius = 3.0f;
     }
+}
+
+#pragma mark - reset dynamic properties in db
+
+- (void)resetDaysLeft:(KFItem *)obj
+{
+    NSInteger d = [self getDaysLeftFrom:[NSDate date] to:[obj valueForKey:@"bestBefore"]];
+    NSNumber *n = [NSNumber numberWithInteger:d];
+    [obj setValue:n forKey:@"daysLeft"];
+}
+
+// Four scales correspond to four colors: 0: green0, 1: green1, 2: green2, 3: gray.
+- (void)resetFreshness:(KFItem *)obj
+{
+    NSInteger f = [[obj valueForKey:@"daysLeft"] integerValue];
+    NSInteger d = [self getDaysLeftFrom:[obj valueForKey:@"timeAdded"] to:[obj valueForKey:@"bestBefore"]];
+    CGFloat r1 = d / 3.0f;
+    CGFloat r2 = d * 2.0f / 3.0f;
+    NSNumber *n;
+    if (f <= 0) {
+        n = [NSNumber numberWithInteger:3];
+    } else if (f <= floorf(r1)) {
+        n = [NSNumber numberWithInteger:2];
+    } else if (f <= floorf(r2)) {
+        n = [NSNumber numberWithInteger:1];
+    } else {
+        n = [NSNumber numberWithInteger:0];
+    }
+    [obj setValue:n forKey:@"freshness"];
 }
 
 #pragma mark - string / date conversion

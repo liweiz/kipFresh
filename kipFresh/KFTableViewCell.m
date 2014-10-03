@@ -13,8 +13,8 @@
 @implementation KFTableViewCell
 
 @synthesize pic;
-@synthesize darkBar;
-@synthesize darkBarRatio;
+@synthesize status;
+@synthesize statusCode;
 @synthesize isForCardView;
 @synthesize appRect;
 @synthesize textBackGroundColor;
@@ -27,6 +27,7 @@
 @synthesize deleteTap;
 @synthesize objId;
 @synthesize box;
+@synthesize bottomLine;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -41,6 +42,12 @@
         self.appRect = [(KFRootViewCtl *)[UIApplication sharedApplication].keyWindow.rootViewController appRect];
         self.textBackGroundColor = [UIColor lightGrayColor];
         self.textBackGroundAlpha = 0.7f;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        CGFloat red;
+        CGFloat green;
+        CGFloat blue;
+        CGFloat alpha;
+        [self.backgroundColor getRed:&red green:&green blue:&blue alpha:&alpha];
     }
     return self;
 }
@@ -54,9 +61,11 @@
     [super layoutSubviews];
     
     // In editing mode, contentView's x is 38.0, while in normal mode, it is 0.0. This can be calculated with NSLogging contentView and backgroundView. contentView's width changes to 282.0 as well, while backgroundView's width does not change.
-    
+    self.textLabel.backgroundColor = [UIColor clearColor];
+    self.contentView.backgroundColor = [UIColor clearColor];
     if (!self.backgroundView) {
         self.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, self.frame.size.height)];
+        self.backgroundView.backgroundColor = [UIColor clearColor];
     }
     if (!self.pic) {
         self.pic = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.backgroundView.frame.size.width, self.backgroundView.frame.size.height)];
@@ -66,9 +75,35 @@
     } else {
         [self.pic removeFromSuperview];
     }
+    if (!self.status) {
+        self.status = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.backgroundView.frame.size.width, self.backgroundView.frame.size.height)];
+    }
+    // Change color for freshness
+    switch (self.statusCode) {
+        case 0:
+            self.status.backgroundColor = self.box.kfGreen0;
+            break;
+        case 1:
+            self.status.backgroundColor = self.box.kfGreen1;
+            break;
+        case 2:
+            self.status.backgroundColor = self.box.kfGreen2;
+            break;
+        case 3:
+            self.status.backgroundColor = self.box.kfGray;
+            break;
+        default:
+            self.status.backgroundColor = [UIColor clearColor];
+            break;
+    }
+    self.status.userInteractionEnabled = NO;
+    [self.contentView addSubview:self.status];
     if (!self.isForCardView) {
-        if (!self.darkBar) {
-            self.darkBar = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.backgroundView.frame.size.width, self.backgroundView.frame.size.height)];
+        if (!self.bottomLine) {
+            CGFloat h1 = 0.5f;
+            self.bottomLine = [[UIView alloc] initWithFrame:CGRectMake(0.0f, self.status.frame.size.height - h1, self.status.frame.size.width, h1)];
+            self.bottomLine.backgroundColor = [UIColor whiteColor];
+            [self.status addSubview:self.bottomLine];
         }
     } else {
         if (!self.notes) {
@@ -76,7 +111,7 @@
             self.notes.backgroundColor = self.textBackGroundColor;
             self.notes.alpha = self.textBackGroundAlpha;
             self.notes.userInteractionEnabled = NO;
-            [self.contentView addSubview:self.notes];
+            [self addSubview:self.notes];
         }
         if (!self.dateAdded) {
             self.dateAdded = [[UITextField alloc] initWithFrame:CGRectMake(10.0f, 100.0f, self.appRect.size.width - 20.0f, 44.0f)];
@@ -124,5 +159,7 @@
     NSNotification *n = [[NSNotification alloc] initWithName:@"deleteItem" object:self userInfo:d];
     [[NSNotificationCenter defaultCenter] postNotification:n];
 }
+
+
 
 @end
